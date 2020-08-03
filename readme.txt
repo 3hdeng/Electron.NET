@@ -1,3 +1,59 @@
+//=== 2020.08.03
+$ Electron.NET/
+$ cd ElectronNET.CLI
+
+
+Electron.NET/ElectronNET.CLI/
+$ dotnet build
+
+
+[Q] how to install local nuget package ?
+https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-nuget-cli
+
+-->
+$ dotnet tool install ElectronNET.CLI -g
+You can invoke the tool using the following command: electronize
+Tool 'electronnet.cli' (version '99.0.0') was successfully installed.
+
+
+-->
+$ dotnet tool install ElectronNET.CLI -g
+Tool 'electronnet.cli' is "already" installed.
+
+$dotnet tool uninstall ElectronNET.CLI -g
+Tool 'electronnet.cli' (version '99.0.0') was successfully "uninstalled".
+
+$ dotnet tool install ElectronNET.CLI -g
+You can invoke the tool using the following command: electronize
+Tool 'electronnet.cli' (version '99.0.0') was successfully installed.
+
+
+//===
+$ cd $dir/ElectronNET.API
+//dotnet restore
+$ dotnet build
+ Successfully created package 'Electron.NET/artifacts/ElectronNET.API.99.0.0.nupkg'.
+
+$  dotnet tool install ElectronNET.API -g
+-->
+[error NU1212]: Invalid project-package combination for ElectronNET.API 99.0.0. DotnetToolReference project style can only contain references of the DotnetTool type
+
+Tool 'electronnet.api' failed to install. This failure may have been caused by:
+...
+* A package by this name was found, but it was not a .NET Core tool.
+...
+
+-->  include project reference to ElectronNET.API
+$ dotnet add reference ../ElectronNET.API(API proj location)
+  or  
+$ dotnet add package ElectronNET.API
+package location(artifacts) is hidden in NuGet.config
+
+has to cp NuGet.config to another proj which needs ElectronNET.API
+
+
+
+
 //=== 2020.07.27
 [Q] diff between electronize start and F5 debug ?
 F5 debug --> pure asp.net core app ? no connection with electronjs yet ??
@@ -35,7 +91,10 @@ stdout: ASP.NET Core host has fully started.
 
 
 //=== 2020.07.24
-ElectronNET.CLI : commandline client to convert cs to js ? electronize ?
+ElectronNET.CLI : commandline client invoke electronjs [electron main.js];
+not to convert cs to js , it rather wrap electronjs and dotnetApp
+-->  electronize ?
+
 ElectronNET.WebApp : web client app in cs
 ElectronNET.Host : electronjs http server (js)
 
